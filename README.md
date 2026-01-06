@@ -36,28 +36,28 @@ Manages Kubernetes deployments using **ArgoCD** and **Ansible**.
 ## 📁 Repository Structure
 gitops-repo/
 │
-├── ansible/                      # Infrastructure automation (provisioning)
+├── ansible/                     # Infrastructure automation (provisioning)
 │   ├── inventories/
 │   ├── roles/
 │   └── playbooks/
 │
-├── argocd/                       # ArgoCD configuration ("App of Apps")
-│   ├── apps/                     # ArgoCD Application CRDs
+├── argocd/                      # ArgoCD configuration ("App of Apps")
+│   ├── apps/                    # ArgoCD Application CRDs
 │   │   ├── taskapp.yaml
 │   │   ├── postgres.yaml
 │   │   └── ingress.yaml
-│   ├── projects/                 # ArgoCD Projects (RBAC and scoping)
+│   ├── projects/                # ArgoCD projects (RBAC & scoping)
 │   │   └── default-project.yaml
-│   └── bootstrap/                # ArgoCD installation & app bootstrap
+│   └── bootstrap/               # ArgoCD installation
 │       └── argocd-install.yaml
 │
-├── apps/                         # Kubernetes application manifests
+├── apps/                        # Kubernetes application manifests
 │   ├── taskapp/
 │   │   ├── deployment.yaml
 │   │   ├── service.yaml
 │   │   ├── ingress.yaml
 │   │   ├── kustomization.yaml
-│   │   └── secrets.yaml          # (Encrypted with SOPS or Sealed Secrets)
+│   │   └── secrets.yaml         # (Encrypted with SOPS or Sealed Secrets)
 │   │
 │   └── postgres/
 │       ├── statefulset.yaml
@@ -65,10 +65,10 @@ gitops-repo/
 │       ├── pvc.yaml
 │       └── kustomization.yaml
 │
-├── clusters/                     # Environment-specific overlays
+├── clusters/                    # Environment-specific overlays
 │   ├── dev/
 │   │   ├── kustomization.yaml
-│   │   ├── taskapp.yaml          # references argocd/apps/taskapp.yaml
+│   │   ├── taskapp.yaml
 │   │   └── postgres.yaml
 │   │
 │   ├── staging/
@@ -82,7 +82,6 @@ gitops-repo/
 │       └── postgres.yaml
 │
 └── README.md
-
 
 ---
 
