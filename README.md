@@ -32,7 +32,7 @@ Manages Kubernetes deployments using **ArgoCD** and **Ansible**.
   - Add-ons  
 
 ---
-
+```
 ## 📁 Repository Structure
 gitops-repo/
 │
@@ -82,7 +82,7 @@ gitops-repo/
 │       └── postgres.yaml
 │
 └── README.md
-
+```
 ---
 
 ## 🔧 Workflow Summary
