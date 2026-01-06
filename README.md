@@ -4,7 +4,7 @@ This repository contains the **infrastructure and deployment configuration** for
 It works together with the main application repository:
 
 ➡️ Application repo (builds Docker images):  
-https://github.com/<BHTS-QuadOps>/Tasklist-App
+[https://github.com/<BHTS-QuadOps>/Tasklist-App](https://github.com/BHTS-QuadOps/Tasklist-App)
 
 ➡️ GitOps repo (this repository):  
 Manages Kubernetes deployments using **ArgoCD** and **Ansible**.
