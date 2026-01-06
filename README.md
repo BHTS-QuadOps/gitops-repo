@@ -4,7 +4,7 @@ This repository contains the **infrastructure and deployment configuration** for
 It works together with the main application repository:
 
 ➡️ Application repo (builds Docker images):  
-https://github.com/<your-user>/taskapp
+https://github.com/<BHTS-QuadOps>/Tasklist-App
 
 ➡️ GitOps repo (this repository):  
 Manages Kubernetes deployments using **ArgoCD** and **Ansible**.
@@ -13,7 +13,7 @@ Manages Kubernetes deployments using **ArgoCD** and **Ansible**.
 
 ## 🚀 Architecture Overview
 
-### 🏗 Application Repository (taskapp)
+### 🏗 Application Repository (Tasklist-App)
 - Contains Spring Boot source code and Dockerfile  
 - GitHub Actions CI builds the JAR  
 - CI builds + pushes Docker images to GHCR  
@@ -32,8 +32,9 @@ Manages Kubernetes deployments using **ArgoCD** and **Ansible**.
   - Add-ons  
 
 ---
-```
+
 ## 📁 Repository Structure
+```
 gitops-repo/
 │
 ├── ansible/                     # Infrastructure automation (provisioning)
@@ -87,7 +88,7 @@ gitops-repo/
 
 ## 🔧 Workflow Summary
 
-### 1️⃣ **Developer pushes code → taskapp repo**
+### 1️⃣ **Developer pushes code → Tasklist-App repo**
 GitHub Actions:
 - Builds Spring Boot JAR  
 - Builds Docker image  
