@@ -7,11 +7,11 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BHTS-QuadOps/gitops-repo.git
-    targetRevision: Sisonke
+    targetRevision: sisonke
     path: apps/postgres
   destination:
     server: https://kubernetes.default.svc
-    namespace: Sisonke
+    namespace: sisonke
   syncPolicy:
     automated:
       prune: true

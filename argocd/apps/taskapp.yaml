@@ -7,11 +7,11 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BHTS-QuadOps/gitops-repo.git
-    targetRevision: Sisonke   # or staging/main depending on branch
+    targetRevision: sisonke   # or staging/main depending on branch
     path: apps/taskapp
   destination:
     server: https://kubernetes.default.svc
-    namespace: Sisonke
+    namespace: sisonke
   syncPolicy:
     automated:
       prune: true
