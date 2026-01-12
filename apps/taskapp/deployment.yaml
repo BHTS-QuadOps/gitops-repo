@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: taskapp
-          image: ghcr.io/BHTS-QuadOps/taskapp:latest
+          image: ghcr.io/bhts-quadops/taskapp:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
