@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskapp
+  template:
+    metadata:
+      labels:
+        app: taskapp
+    spec:
+      containers:
+      - name: taskapp
+        image: ghcr.io/BHTS-QuadOps/taskapp:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - secretRef:
+            name: taskapp-secret

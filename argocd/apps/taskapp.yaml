@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: taskapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/BHTS-QuadOps/gitops-repo
+    path: clusters/dev    # change to staging/prod depending on promotion flow
+    targetRevision: main
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: taskapp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

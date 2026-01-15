@@ -1,0 +1,4 @@
+resources:
+  - taskapp.yaml
+  - postgres.yaml
+  - ingress.yaml
