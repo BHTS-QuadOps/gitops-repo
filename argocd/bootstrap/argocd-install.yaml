@@ -12,13 +12,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/argoproj/argo-cd.git
+    repoURL: https://github.com/argoproj/argo-cd
     targetRevision: v3.2.4
-    path: .
-    directory:
-      recurse: false
-      include:
-        - install.yaml
+    path: manifests/cluster-install
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
