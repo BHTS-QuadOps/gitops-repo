@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../apps/taskapp
+
+patches:
+  - target:
+      kind: Deployment
+      name: taskapp
+    patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: taskapp
+      spec:
+        replicas: 3
+        template:
+          spec:
+            containers:
+              - name: taskapp
+                image: ghcr.io/BHTS-QuadOps/taskapp:prod

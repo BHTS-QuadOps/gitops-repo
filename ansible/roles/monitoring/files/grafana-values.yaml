@@ -1,0 +1,37 @@
+grafana:
+  enabled: true
+
+  # Use a lighter, simpler Grafana image (works in WSL2)
+  image:
+    repository: grafana/grafana
+    tag: "9.5.2"
+
+  podSecurityContext:
+    fsGroup: 472
+    runAsUser: 472
+
+  securityContext:
+    privileged: true
+    allowPrivilegeEscalation: true
+
+  containerSecurityContext:
+    privileged: true
+    allowPrivilegeEscalation: true
+
+  # Disable all sidecars (they crash on WSL2 due to missing cgroups)
+  sidecar:
+    dashboards:
+      enabled: false
+    datasources:
+      enabled: false
+
+  # Disable dashboards sourced from files
+  dashboardsProvider:
+    enabled: false
+
+  # Disable serviceMonitor (requires nodeExporter)
+  serviceMonitor:
+    enabled: false
+
+nodeExporter:
+  enabled: false
