@@ -14,25 +14,24 @@ spec:
         app: postgres
     spec:
       containers:
-        - name: postgres
-          image: postgres:16
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: taskdb
-            - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_PASSWORD
-              value: change-me
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/postgresql/data
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 5Gi
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi

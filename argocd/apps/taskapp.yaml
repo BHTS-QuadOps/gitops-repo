@@ -6,15 +6,15 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/BHTS-QuadOps/gitops-repo.git
-    targetRevision: sisonke   # or staging/main depending on branch
-    path: apps/taskapp
+    repoURL: https://github.com/BHTS-QuadOps/gitops-repo
+    path: clusters/dev    # change to staging/prod depending on promotion flow
+    targetRevision: main
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: sisonke
+    namespace: taskapp
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

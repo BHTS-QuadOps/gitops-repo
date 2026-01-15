@@ -4,15 +4,12 @@ metadata:
   name: default
   namespace: argocd
 spec:
-  description: Default project for GitOps apps
+  description: Default project for all applications
   sourceRepos:
-    - https://github.com/BHTS-QuadOps/gitops-repo.git
+    - https://github.com//BHTS-QuadOps/gitops-repo
   destinations:
     - namespace: '*'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-  namespaceResourceWhitelist:
     - group: '*'
       kind: '*'
