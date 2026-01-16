@@ -4,14 +4,14 @@
   ignore_errors: yes
   become: yes
 
-- name: Install ArgoCD manifests
-  command: >
-    microk8s kubectl apply -n argocd
-    -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  become: yes
+# - name: Install ArgoCD manifests
+#   command: >
+#     microk8s kubectl apply -n argocd
+#     -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+#   become: yes
 
-- name: Wait for ArgoCD server rollout
-  command: >
-    microk8s kubectl rollout status deployment/argocd-server
-    -n argocd --timeout=300s
-  become: yes
+# - name: Wait for ArgoCD server rollout
+#   command: >
+#     microk8s kubectl rollout status deployment/argocd-server
+#     -n argocd --timeout=300s
+#   become: yes
