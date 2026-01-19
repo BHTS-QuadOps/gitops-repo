@@ -17,6 +17,10 @@ spec:
     targetRevision: 7.3.4
     helm:
       values: |
+        server:
+          enabled: true
+          staticAssets:
+            enabled: true
         configs:
           params:
             server.insecure: true
