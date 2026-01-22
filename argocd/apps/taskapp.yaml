@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BHTS-QuadOps/gitops-repo
-    path: clusters/dev    # change to staging/prod depending on promotion flow
+    path: apps/postgres   
     targetRevision: main
     directory:
       recurse: true
