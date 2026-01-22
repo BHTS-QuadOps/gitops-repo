@@ -3,29 +3,6 @@ kind: Namespace
 metadata:
   name: argocd
 ---
-# Install ArgoCD core components
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: argocd-core
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/argoproj/argo-cd.git
-    targetRevision: v3.2.4
-    path: .
-    directory:
-      recurse: false
-      include:
-        - install.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
-  syncPolicy:
-    automated:
-      selfHeal: true
----
 # Root application (App of Apps)
 apiVersion: argoproj.io/v1alpha1
 kind: Application

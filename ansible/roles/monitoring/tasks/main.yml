@@ -1,0 +1,34 @@
+---
+- name: Copy Helm override file for monitoring
+  copy:
+    src: grafana-values.yaml
+    dest: /tmp/grafana-values.yaml
+  become: yes
+
+- name: Ensure monitoring namespace exists
+  command: microk8s kubectl apply -f -
+  args:
+    stdin: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: monitoring
+  become: yes
+
+- name: Add Prometheus repo to MicroK8s Helm
+  command: microk8s helm3 repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  ignore_errors: yes
+  become: yes
+
+- name: Update Helm repos
+  command: microk8s helm3 repo update
+  become: yes
+
+- name: Install or upgrade kube-prometheus-stack (WSL2-friendly & idempotent)
+  command: >
+    microk8s helm3 upgrade --install monitoring
+    prometheus-community/kube-prometheus-stack
+    --namespace monitoring
+    --create-namespace
+    -f /tmp/grafana-values.yaml
+  become: yes

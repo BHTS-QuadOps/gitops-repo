@@ -1,0 +1,22 @@
+---
+- name: Ensure argocd namespace exists
+  command: microk8s kubectl apply -f -
+  args:
+    stdin: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: argocd
+  become: yes
+
+- name: Install ArgoCD using official upstream manifests
+  command: >
+    microk8s kubectl apply -n argocd
+    -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  become: yes
+
+- name: Wait for ArgoCD server rollout
+  command: >
+    microk8s kubectl rollout status deployment/argocd-server
+    -n argocd --timeout=300s
+  become: yes

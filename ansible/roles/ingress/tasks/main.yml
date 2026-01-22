@@ -1,0 +1,69 @@
+---
+- name: Enable NGINX ingress controller
+  command: microk8s enable ingress
+  become: yes
+
+# Detect legacy MicroK8s ingress addon
+- name: Check for legacy ingress namespace
+  command: microk8s kubectl get ns ingress
+  register: legacy_ns
+  ignore_errors: yes
+
+# Detect new ingress-nginx namespace
+- name: Check for new ingress-nginx namespace
+  command: microk8s kubectl get ns ingress-nginx
+  register: new_ns
+  ignore_errors: yes
+
+
+#############################################
+# LEGACY INGRESS (namespace: ingress)
+#############################################
+- name: Wait for legacy ingress pod to exist
+  command: microk8s kubectl get pod -n ingress -l name=nginx-ingress-microk8s
+  register: legacy_ingress_pod
+  retries: 30
+  delay: 5
+  until: legacy_ingress_pod.rc == 0
+  when: legacy_ns.rc == 0
+  become: yes
+
+- name: Wait for legacy ingress pod to be ready
+  command: >
+    microk8s kubectl wait --namespace ingress
+    --for=condition=Ready pod
+    -l name=nginx-ingress-microk8s
+    --timeout=180s
+  when: legacy_ns.rc == 0
+  become: yes
+
+
+#############################################
+# NEW INGRESS-NGINX (namespace: ingress-nginx)
+#############################################
+- name: Wait for new ingress-nginx controller pod to exist
+  command: microk8s kubectl get pod -n ingress-nginx -l app.kubernetes.io/component=controller
+  register: new_ingress_pod
+  retries: 30
+  delay: 5
+  until: new_ingress_pod.rc == 0
+  when: new_ns.rc == 0
+  become: yes
+
+- name: Wait for new ingress-nginx controller pod to be ready
+  command: >
+    microk8s kubectl wait --namespace ingress-nginx
+    --for=condition=Ready pod
+    -l app.kubernetes.io/component=controller
+    --timeout=180s
+  when: new_ns.rc == 0
+  become: yes
+
+
+#############################################
+# FAIL IF NEITHER INGRESS TYPE EXISTS
+#############################################
+- name: Fail if ingress did not deploy
+  fail:
+    msg: "Ingress controller not found in 'ingress' or 'ingress-nginx'."
+  when: legacy_ns.rc != 0 and new_ns.rc != 0
