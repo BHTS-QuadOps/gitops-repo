@@ -7,10 +7,10 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BHTS-QuadOps/gitops-repo
-    path: apps/postgres
     targetRevision: main
-    directory:
-      recurse: true
+    path: apps/postgres
+    plugin:
+      name: sops
   destination:
     server: https://kubernetes.default.svc
     namespace: postgres
