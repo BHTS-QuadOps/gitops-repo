@@ -18,3 +18,12 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: postgres-secret
+      namespace: postgres
+      jsonPointers:
+        - /data
+        - /stringData
+        - /sops

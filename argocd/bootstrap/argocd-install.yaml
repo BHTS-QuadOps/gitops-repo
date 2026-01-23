@@ -22,10 +22,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  ignoreDifferences:
-    - group: ""                 # core Kubernetes API
-      kind: Secret
-      name: postgres-secret
-      jsonPointers:
-        - /stringData
-        - /sops
