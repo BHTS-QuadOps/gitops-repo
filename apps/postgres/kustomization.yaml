@@ -5,5 +5,4 @@ resources:
   - namespace.yaml
   - statefulset.yaml
   - service.yaml
-  - pvc.yaml
   - secrets.enc.yaml
