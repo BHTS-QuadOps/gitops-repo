@@ -19,4 +19,4 @@ patches:
           spec:
             containers:
               - name: taskapp
-                image: ghcr.io/BHTS-QuadOps/taskapp:dev
+                image: ghcr.io/bhts-quadops/taskapp:dev
