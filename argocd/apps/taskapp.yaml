@@ -7,10 +7,10 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BHTS-QuadOps/gitops-repo
-    path: apps/taskapp  
     targetRevision: main
-    directory:
-      recurse: true
+    path: apps/taskapp
+    plugin:
+      name: sops-v1.0
   destination:
     server: https://kubernetes.default.svc
     namespace: taskapp
