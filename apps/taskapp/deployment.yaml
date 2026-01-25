@@ -12,24 +12,24 @@ spec:
       labels:
         app: taskapp
     spec:
-
       initContainers:
-        - name: decrypt-config
-          image: mozilla/sops:3.7.1
-          command:
-            - sh
-            - -c
-            - sops -d /encrypted/secrets.enc.yaml > /config/application.yaml
-          env:
-            - name: SOPS_AGE_KEY_FILE
-              value: /keys/keys.txt
-          volumeMounts:
-            - name: encrypted-secret
-              mountPath: /encrypted
-            - name: decrypted-config
-              mountPath: /config
-            - name: age-key
-              mountPath: /keys
+      - name: decrypt-config
+        image: ghcr.io/mozilla/sops:latest
+        command:
+          - sh
+          - -c
+          - sops -d /encrypted/secrets.enc.yaml > /config/application.yaml
+        env:
+          - name: SOPS_AGE_KEY_FILE
+            value: /keys/keys.txt
+        volumeMounts:
+          - name: encrypted-secret
+            mountPath: /encrypted
+          - name: decrypted-config
+            mountPath: /config
+          - name: age-key
+            mountPath: /keys
+      
 
       containers:
         - name: taskapp
