@@ -15,13 +15,11 @@ spec:
 
       initContainers:
         - name: decrypt-config
-          image: alpine:3.18
+          image: mozilla/sops:3.7.1
           command:
             - sh
             - -c
-            - |
-              apk add --no-cache sops age \
-              && sops -d /encrypted/secrets.enc.yaml > /config/application.yaml
+            - sops -d /encrypted/secrets.enc.yaml > /config/application.yaml
           env:
             - name: SOPS_AGE_KEY_FILE
               value: /keys/keys.txt
