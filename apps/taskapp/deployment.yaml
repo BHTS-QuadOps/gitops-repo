@@ -12,44 +12,12 @@ spec:
       labels:
         app: taskapp
     spec:
-      initContainers:
-      - name: decrypt-config
-        image: ghcr.io/mozilla/sops:latest
-        command:
-          - sh
-          - -c
-          - sops -d /encrypted/secrets.enc.yaml > /config/application.yaml
-        env:
-          - name: SOPS_AGE_KEY_FILE
-            value: /keys/keys.txt
-        volumeMounts:
-          - name: encrypted-secret
-            mountPath: /encrypted
-          - name: decrypted-config
-            mountPath: /config
-          - name: age-key
-            mountPath: /keys
-      
-
       containers:
         - name: taskapp
           image: ghcr.io/bhts-quadops/taskapp:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          env:
-            - name: SPRING_CONFIG_LOCATION
-              value: file:/app/config/
-          volumeMounts:
-            - name: decrypted-config
-              mountPath: /app/config
-
-      volumes:
-        - name: encrypted-secret
-          secret:
-            secretName: taskapp-secret
-        - name: decrypted-config
-          emptyDir: {}
-        - name: age-key
-          secret:
-            secretName: argocd-sops-age
+          envFrom:
+            - secretRef:
+                name: taskapp-secret
