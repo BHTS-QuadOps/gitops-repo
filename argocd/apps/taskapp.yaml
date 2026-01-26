@@ -18,3 +18,12 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: taskapp-secret
+      namespace: taskapp
+      jsonPointers:
+        - /data
+        - /stringData
+        - /sops
