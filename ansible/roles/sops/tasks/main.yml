@@ -1,0 +1,7 @@
+---
+- name: Install SOPS
+  get_url:
+    url: https://github.com/getsops/sops/releases/download/v3.9.1/sops-v3.9.1.linux.amd64
+    dest: /usr/local/bin/sops
+    mode: "0755"
+  become: yes
