@@ -22,24 +22,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
-
-# Argo CD self-managed application
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: argocd-core
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/BHTS-QuadOps/gitops-repo
-    targetRevision: main
-    path: argocd/core
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
